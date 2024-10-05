@@ -151,28 +151,25 @@
       margin: 0 5px;
     }
 
-    . bttn:hover {
-      transform: scale(1.1);
+    .bttn:hover {
+      transform: translateY(-5px);
     }
 
-    .bttn:active {
-      transform: scale(0.9);
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-5px);
+      }
     }
 
-    .bttn:disabled {
-      background-color: #757575;
-      color: #afafaf;
-      cursor: not-allowed;
+    .bttn:hover {
+      animation: float 2s ease infinite;
     }
-
-    .bttn:disabled:hover {
-      transform: none;
-    }
-
-    .bttn:disabled:active {
-      transform: none;
-    }
-  </style>
+  </style >
 </head>
 
 <body>
@@ -189,7 +186,6 @@
     <div class="footer">
       <div>
         <a href="https://github.com/outerworld-proxy/outerworld-proxy">GitHub</a>
-        <a href="https://discord.gg/outerworld-proxy">Discord</a>
       </div>
       <div>
         <a href="https://outerworld-proxy.github.io/outerworld-proxy">outerworld-proxy.github.io</a>
@@ -197,6 +193,9 @@
     </div>
   </div>
   <script src="/script.js"></script>
+  <script>
+    console.log(__uv$config);
+  </script>
 </body>
 
 </html>
