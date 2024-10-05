@@ -182,31 +182,35 @@
     <input type="text" id="searchInput" class="input" placeholder="google search">
   </div>
 
-  <script>
-    const input = document.getElementById('searchInput');
+<script>
+  const input = document.getElementById('searchInput');
 
-    input.addEventListener('keypress', function (event) {
-      if (event.key === 'Enter') {
-        const userInput = input.value;
+  input.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+      const userInput = input.value;
 
-        if (userInput) {
-          console.log("User input: ", userInput);
+      if (userInput) {
+        console.log("User input: ", userInput);
 
-          if (typeof __uv$config !== 'undefined' && __uv$config.encodeUrl) {
-            const encodedURL = __uv$config.encodeUrl(userInput);
-            console.log("Encoded URL: ", encodedURL);
+        // Check if UV config is properly loaded
+        if (typeof __uv$config !== 'undefined' && __uv$config.encodeUrl) {
+          const encodedURL = __uv$config.encodeUrl(userInput);
+          const finalURL = __uv$config.prefix + encodedURL; // Append encoded URL to the proxy prefix
+          console.log("Encoded URL: ", encodedURL);
+          console.log("Final URL: ", finalURL);
 
-            // Redirect to the encoded URL
-            window.location.href = encodedURL;
-          } else {
-            console.error("UV encoding function not found.");
-          }
+          // Redirect to the encoded URL via UV proxy
+          window.location.href = finalURL;
         } else {
-          console.warn("No input provided.");
+          console.error("UV encoding function not found.");
         }
+      } else {
+        console.warn("No input provided.");
       }
-    });
-  </script>
+    }
+  });
+</script>
+
 </body>
 
 </html>
