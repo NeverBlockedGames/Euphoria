@@ -1,27 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="/favicon.ico" type="image/png">
+  <link rel="shortcut icon" href="assets/apexnet.jpg" type="image/png">
   <title>euphoria</title>
-
   <meta property="og:title" content="outerworld">
-  <meta property="og:description" content="outerworld proxy is an unblocker, a really cool unblocker." />
-  <meta property="og:image" content="/favicon.ico" />
-  <meta name="theme-color" content="#262262" />
-
-  <link rel="stylesheet" href="/style.css">
+  <meta property="og:description" content="outerworld proxy is an unblocker, a really cool unblocker.">
+  <meta property="og:image" content="assets/apexnet.jpg">
+  <meta name="theme-color" content="#262262">
+  <link rel="stylesheet" href="./assets/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
-
-  <script src="/register-sw.js"></script>
-  <script src="/uv.config.js"></script>
-  <script src="/uv.bundle.js"></script>
-
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="./uv/uv.bundle.js"></script>
+  <script src="./uv/uv.config.js"></script>
+  <script src="./assets/register-sw.js"></script>
   <style>
     * {
       margin: 0;
@@ -108,8 +102,7 @@
       padding-right: 30px;
     }
 
-    .footer a,
-    .footer a:visited {
+    .footer a, .footer a:visited {
       cursor: pointer;
       color: white;
       font-size: 16px;
@@ -147,7 +140,7 @@
       font-size: 16px;
       cursor: pointer;
       border-radius: 12px;
-      transition: transform 0.5 s;
+      transition: transform 0.5s;
       margin: 0 5px;
     }
 
@@ -156,11 +149,9 @@
     }
 
     @keyframes float {
-      0%,
-      100% {
+      0%, 100% {
         transform: translateY(0);
       }
-
       50% {
         transform: translateY(-5px);
       }
@@ -169,5 +160,39 @@
     .bttn:hover {
       animation: float 2s ease infinite;
     }
-  </style >
-</head>
+  </style>
+</head >
+<body>
+  <div class="container">
+    <h1>euphoria</h1>
+    <p class="description">Search the web securely</p>
+    <input type="text" id="searchInput" class="input" placeholder="Enter URL or search...">
+  </div>
+  <script>
+    const input = document.getElementById('searchInput');
+    input.addEventListener('keypress', function (event) {
+      if (event.key === 'Enter') {
+        const userInput = input.value.trim();
+        if (userInput) {
+          let src;
+          // Determine if the input is a URL, domain, or search query
+          if (userInput.includes("http") && userInput.includes(":")) {
+            // Full URL provided
+            src = '/uv/service/' + __uv$config.encodeUrl(userInput);
+          } else if (userInput.includes(".") && !userInput.includes(" ")) {
+            // Domain without http or https (e.g., google.com)
+            src = '/uv/service/' + __uv$config.encodeUrl("https://" + userInput);
+          } else {
+            // Treat as a search query
+            src = '/uv/service/' + __uv$config.encodeUrl("https://google.com/search?q=" + encodeURIComponent(userInput));
+          }
+          // Redirect to the encoded URL via UV proxy
+          window.location.href = src;
+        } else {
+          console.warn("No input provided.");
+        }
+      }
+    });
+  </script>
+</body>
+</html>
