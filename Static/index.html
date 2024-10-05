@@ -107,62 +107,18 @@
       color: white;
       font-size: 16px;
       text-decoration: none;
-      text-underline-offset: 2.5px;
     }
 
     .footer a:hover {
-      text-decoration: underline;
+      color: #685dff;
     }
 
-    .footer div {
-      display: flex;
-      gap: 26px;
-    }
-
-    .bttn-container {
-      position: absolute;
-      bottom: 25%;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-    }
-
-    .bttn {
-      background-color: grey;
-      color: white;
-      padding: 10px 20px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 12px;
-      transition: transform 0.5s;
-      margin: 0 5px;
-    }
-
-    .bttn:hover {
-      transform: translateY(-5px);
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-5px);
-      }
-    }
-
-    .bttn:hover {
-      animation: float 2 s ease infinite;
+    .footer a:active {
+      color: #4f4f4f;
     }
  </style>
 </head>
-<body >
+<body>
   <div class="container">
     <div class="header">
       <img class="icon" src="assets/apexnet.jpg" alt="Apexnet">
@@ -189,16 +145,9 @@
       });
     </script>
   </div>
-  <div class="bttn-container">
-    <a href="https://github.com/your-github-username/your-repo-name" target="_blank" rel="noopener noreferrer" class="bttn">GitHub</a>
-    <a href="https://twitter.com/your-twitter-handle" target="_blank" rel="noopener noreferrer" class="bttn">Twitter</a>
-  </div>
   <div class="footer">
-    <div>
-      <a href="https://github.com/your-github-username/your-repo-name" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="https://twitter.com/your-twitter-handle" target="_blank" rel="noopener noreferrer">Twitter</a>
-    </div>
-    <p>&copy; 2023 outerworld</p>
+ <a href="https://github.com/your-github-username/your-repo-name">GitHub</a>
+    <a href="https://twitter.com/your-twitter-handle">Twitter</a>
   </div>
 </body>
 </html>
