@@ -19,11 +19,11 @@ const __uv$config = {
     }
     return result + (search.length ? "?" + search.join("?") : "");
   },
-  handler: '/Static/uv/uv.handler.js',
-  client: '/Static/uv/uv.client.js',
-  bundle: '/Static/uv/uv.bundle.js',
-  config: '/Static/uv/uv.config.js',
-  sw: '/Static/uv/uv.sw.js',
+  handler: '/uv/uv.handler.js',
+  client: '/uv/uv.client.js',
+  bundle: '/uv/uv.bundle.js',
+  config: '/uv/uv.config.js',
+  sw: '/uv/uv.sw.js',
 };
 
 export { __uv$config };
