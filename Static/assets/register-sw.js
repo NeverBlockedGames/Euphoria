@@ -2,7 +2,7 @@
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/UV/uv.handler.js')
+    navigator.serviceWorker.register('/uv/uv.handler.js')
       .then(function(registration) {
         console.log('Service Worker registered with scope:', registration.scope);
       })
