@@ -13,9 +13,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <script src="./uv/uv.bundle.js"></script>
-  <script src="./uv/uv.config.js"></script>
-  <script src="./assets/register-sw.js"></script>
+  <script src="uv/uv.bundle.js"></script>
+  <script src="uv/uv.config.js"></script>
+  <script src="assets/register-sw.js"></script>
   <style>
     * {
       margin: 0;
@@ -158,39 +158,34 @@
     }
 
     .bttn:hover {
-      animation: float 2s ease infinite;
+      animation: float 2 s ease infinite;
     }
-  </style>
-</head >
+ </style>
+</head>
 <body>
   <div class="container">
-    <h1>euphoria</h1>
-    <p class="description">Search the web securely</p>
-    <input type="text" id="searchInput" class="input" placeholder="Enter URL or search...">
+    <div class="header">
+      <img class="icon" src="assets/apexnet.jpg" alt="Apexnet Logo">
+      <h1>outerworld</h1>
+    </div>
+    <p class="description">outerworld proxy is an unblocker, a really cool unblocker.</p>
+    <input class="input" type="text" id="url" placeholder="Enter URL">
   </div>
   <script>
-    const input = document.getElementById('searchInput');
-    input.addEventListener('keypress', function (event) {
+    // Get the input field
+    const inputField = document.querySelector('#url');
+
+    // Add event listener to the input field
+    inputField.addEventListener('keypress', (event) => {
+      // Check if the Enter key is pressed
       if (event.key === 'Enter') {
-        const userInput = input.value.trim();
-        if (userInput) {
-          let src;
-          // Determine if the input is a URL, domain, or search query
-          if (userInput.includes("http") && userInput.includes(":")) {
-            // Full URL provided
-            src = '/uv/service/' + __uv$config.encodeUrl(userInput);
-          } else if (userInput.includes(".") && !userInput.includes(" ")) {
-            // Domain without http or https (e.g., google.com)
-            src = '/uv/service/' + __uv$config.encodeUrl("https://" + userInput);
-          } else {
-            // Treat as a search query
-            src = '/uv/service/' + __uv$config.encodeUrl("https://google.com/search?q=" + encodeURIComponent(userInput));
-          }
-          // Redirect to the encoded URL via UV proxy
-          window.location.href = src;
-        } else {
-          console.warn("No input provided.");
-        }
+        // Get the URL from the input field
+        const url = inputField.value;
+
+        // Use the UV proxy implementation
+        const proxy = new UVProxy();
+        proxy.setUrl(url);
+        proxy.start();
       }
     });
   </script>
