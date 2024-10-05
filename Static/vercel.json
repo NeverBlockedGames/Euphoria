@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/uv/service/:path*",
+      "destination": "/uv/uv.handler.js"
+    }
+  ]
+}
