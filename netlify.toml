@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/uv/service/*"
+  to = "/UV/uv.handler.js"
+  status = 200
