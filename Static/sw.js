@@ -5,8 +5,8 @@ const urlsToCache = [
   '/',
   '/index.html',
   '/assets/style.css',
-  '/UV/uv.bundle.js',
-  '/UV/uv.config.js',
+  '/uv/uv.bundle.js',
+  '/uv/uv.config.js',
 ];
 
 // Install the service worker
