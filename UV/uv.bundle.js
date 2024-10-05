@@ -36,5 +36,5 @@ self.__uv$config = {
   client: '/UV/uv.sw.js',        // Path to UV service worker script
   bundle: '/UV/uv.bundle.js',    // Path to this bundle script
   config: '/UV/uv.config.js',    // Path to UV config script
-  sw: '/UV/uv.sw.js',            // Path to service worker script
+  sw: '/UV/Uv.sw.js',            // Path to service worker script
 };
