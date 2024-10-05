@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="favicon.ico" type="image/png">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png">
   <title>euphoria</title>
 
   <meta property="og:title" content="outerworld">
   <meta property="og:description" content="outerworld proxy is an unblocker, a really cool unblocker." />
-  <meta property="og:image" content="favicon.ico" />
+  <meta property="og:image" content="/favicon.ico" />
   <meta name="theme-color" content="#262262" />
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet">
 
-  <script src="register-sw.js"></script>
+  <script src="/register-sw.js"></script>
   <script src="/uv.config.js"></script>
-  <script src="uv.bundle.js"></script>
+  <script src="/uv.bundle.js"></script>
 
   <style>
     * {
@@ -126,7 +126,7 @@
       gap: 26px;
     }
 
-    . bttn-container {
+    .bttn-container {
       position: absolute;
       bottom: 25%;
       left: 50%;
@@ -151,66 +151,52 @@
       margin: 0 5px;
     }
 
-    .bttn:hover {
-      transform: translateY(-5px);
+    . bttn:hover {
+      transform: scale(1.1);
     }
 
-    @keyframes float {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-5px);
-      }
+    .bttn:active {
+      transform: scale(0.9);
     }
 
-    .bttn:hover {
-      animation: float 2s ease infinite;
+    .bttn:disabled {
+      background-color: #757575;
+      color: #afafaf;
+      cursor: not-allowed;
+    }
+
+    .bttn:disabled:hover {
+      transform: none;
+    }
+
+    .bttn:disabled:active {
+      transform: none;
     }
   </style>
-
 </head>
 
- <body>
+<body>
   <div class="container">
-    <h1>euphoria</h1>
-    <p class="description">Search the web securely</p>
-    <input type="text" id="searchInput" class="input" placeholder="Enter URL or search...">
+    <div class="header">
+      <img class="icon" src="/favicon.ico" alt="outerworld logo">
+      <h1>outerworld</h1>
+    </div>
+    <p class="description">outerworld proxy is an unblocker, a really cool unblocker.</p>
+    <input class="input" type="text" id="url" placeholder="Enter URL">
+    <div class="bttn-container">
+      <button class="bttn" id="go">Go</button>
+    </div>
+    <div class="footer">
+      <div>
+        <a href="https://github.com/outerworld-proxy/outerworld-proxy">GitHub</a>
+        <a href="https://discord.gg/outerworld-proxy">Discord</a>
+      </div>
+      <div>
+        <a href="https://outerworld-proxy.github.io/outerworld-proxy">outerworld-proxy.github.io</a>
+      </div>
+    </div>
   </div>
-
-  <script>
-    const input = document.getElementById('searchInput');
-
-    input.addEventListener('keypress', function (event) {
-      if (event.key === 'Enter') {
-        const userInput = input.value.trim();
-
-        if (userInput) {
-          let src;
-
-          // Determine if the input is a URL, domain, or search query
-          if (userInput.includes("http") && userInput.includes(":")) {
-            // Full URL provided
-            src = '/uv/service/' + __uv$config.encodeUrl(userInput);
-          } else if (userInput.includes(".") && !userInput.includes(" ")) {
-            // Domain without http or https (e.g., google.com)
-            src = '/uv/service/' + __uv$config.encodeUrl("https://" + userInput);
-          } else {
-            // Treat as a search query
-            src = '/uv/service/' + __uv$config.encodeUrl("https://google.com/search?q=" + encodeURIComponent(userInput));
-          }
-
-          // Redirect to the encoded URL via UV proxy
-          window.location.href = src;
-        } else {
-          console.warn("No input provided.");
-        }
-      }
-    });
-  </script>
-
+  <script src="/script.js"></script>
 </body>
 
 </html>
