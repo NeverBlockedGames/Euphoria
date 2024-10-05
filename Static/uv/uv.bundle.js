@@ -13,7 +13,12 @@ const handleRequest = (url) => {
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
         // Send the search results back to the client
         console.log(data);
@@ -21,6 +26,7 @@ const handleRequest = (url) => {
       .catch((error) => {
         // Handle any errors that occur during the request
         console.error(error);
+        alert('Error: ' + error.message);
       });
   } else {
     // If the URL is not a search query, redirect the user to the original URL
