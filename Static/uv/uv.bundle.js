@@ -33,4 +33,4 @@ const handleRequest = (req, res) => {
 };
 
 // Export the handleRequest function
-export default handleRequest;
+export { handleRequest };
