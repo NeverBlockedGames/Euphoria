@@ -8,16 +8,14 @@
   <title>euphoria</title>
 
   <meta property="og:title" content="outerworld">
-  <meta property="og:description"
-    content="outerworld proxy is an unblocker, a really cool unblocker." />
+  <meta property="og:description" content="outerworld proxy is an unblocker, a really cool unblocker." />
   <meta property="og:image" content="assets/apexnet.jpg" />
   <meta name="theme-color" content="#262262" />
 
   <link rel="stylesheet" href="./assets/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet">
 
   <script src="./uv/uv.bundle.js"></script>
@@ -178,8 +176,8 @@
 <body>
   <div class="container">
     <h1>euphoria</h1>
-    <p class="description">did you know obamas last name is obama</p>
-    <input type="text" id="searchInput" class="input" placeholder="google search">
+    <p class="description">Search the web securely</p>
+    <input type="text" id="searchInput" class="input" placeholder="Enter URL or search...">
   </div>
 
 <script>
@@ -187,23 +185,25 @@
 
   input.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
-      const userInput = input.value;
+      const userInput = input.value.trim();
 
       if (userInput) {
-        console.log("User input: ", userInput);
+        let src;
 
-        // Check if UV config is properly loaded
-        if (typeof __uv$config !== 'undefined' && __uv$config.encodeUrl) {
-          const encodedURL = __uv$config.encodeUrl(userInput);
-          const finalURL = __uv$config.prefix + encodedURL; // Append encoded URL to the proxy prefix
-          console.log("Encoded URL: ", encodedURL);
-          console.log("Final URL: ", finalURL);
-
-          // Redirect to the encoded URL via UV proxy
-          window.location.href = finalURL;
+        // Determine if the input is a URL, domain, or search query
+        if (userInput.includes("http") && userInput.includes(":")) {
+          // Full URL provided
+          src = '/uv/service/' + __uv$config.encodeUrl(userInput);
+        } else if (userInput.includes(".") && !userInput.includes(" ")) {
+          // Domain without http or https (e.g., google.com)
+          src = '/uv/service/' + __uv$config.encodeUrl("https://" + userInput);
         } else {
-          console.error("UV encoding function not found.");
+          // Treat as a search query
+          src = '/uv/service/' + __uv$config.encodeUrl("https://google.com/search?q=" + encodeURIComponent(userInput));
         }
+
+        // Redirect to the encoded URL via UV proxy
+        window.location.href = src;
       } else {
         console.warn("No input provided.");
       }
