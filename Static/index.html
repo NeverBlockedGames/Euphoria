@@ -162,30 +162,43 @@
     }
  </style>
 </head>
-<body>
+<body >
   <div class="container">
     <div class="header">
-      <img class="icon" src="assets/apexnet.jpg" alt="Apexnet Logo">
+      <img class="icon" src="assets/apexnet.jpg" alt="Apexnet">
       <h1>outerworld</h1>
     </div>
     <p class="description">outerworld proxy is an unblocker, a really cool unblocker.</p>
-    <input class="input" type="text" id="url" placeholder="Enter URL">
+    <input id="url" class="input" type="text" placeholder="Enter URL">
+    <script type="module">
+      import { handleRequest } from './uv/uv.bundle.js';
+
+      // Get the input field
+      const inputField = document.querySelector('#url');
+
+      // Add event listener to the input field
+      inputField.addEventListener('keypress', (event) => {
+        // Check if the Enter key is pressed
+        if (event.key === 'Enter') {
+          // Get the URL from the input field
+          const url = inputField.value;
+
+          // Use the UV proxy implementation
+          handleRequest(url);
+        }
+      });
+    </script>
   </div>
-  <script>
-    // Get the input field
-    const inputField = document.querySelector('#url');
-
-    // Add event listener to the input field
-    inputField.addEventListener('keypress', (event) => {
-      // Check if the Enter key is pressed
-      if (event.key === 'Enter') {
-        // Get the URL from the input field
-        const url = inputField.value;
-
-        // Use the UV proxy implementation
-        handleRequest(url);
-      }
-    });
-  </script>
+  <div class="bttn-container">
+    <a href="https://github.com/your-github-username/your-repo-name" target="_blank" rel="noopener noreferrer" class="bttn">GitHub</a>
+    <a href="https://twitter.com/your-twitter-handle" target="_blank" rel="noopener noreferrer" class="bttn">Twitter</a>
+  </div>
+  <div class="footer">
+    <div>
+      <a href="https://github.com/your-github-username/your-repo-name" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://twitter.com/your-twitter-handle" target="_blank" rel="noopener noreferrer">Twitter</a>
+    </div>
+    <p>&copy; 2023 outerworld</p>
+  </div>
 </body>
 </html>
