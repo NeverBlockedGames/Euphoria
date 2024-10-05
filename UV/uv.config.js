@@ -8,5 +8,5 @@ self.__uv$config = {
     client: '/uv.client.js',
     bundle: '/uv.bundle.js',
     config: '/uv.config.js',
-    sw: '/uv.sw.js',
+    sw: '/Uv.sw.js',
 };
